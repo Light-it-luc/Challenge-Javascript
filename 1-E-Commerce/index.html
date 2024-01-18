@@ -42,11 +42,6 @@
     </div>
 
     <script>
-        const products = [];
-
-        localStorage.setItem('favorites', '[]');
-        localStorage.setItem('limit', '6');
-
         const createCardNode = function (card) {
             const container = document.createElement('div')
             container.classList.add('card')
@@ -171,11 +166,28 @@
             }
         }
 
+        const reconstructFavorites = function () {
+            const favorites = JSON.parse(localStorage.getItem('favorites')) || []
+
+            favorites.forEach(item => {
+                const inProducts = products.find(product => product.id == item.id)
+                inProducts['favorite'] = true
+            })
+        }
+
+        const products = [];
+
+        localStorage.setItem('limit', '6');
+        if (! 'favorites' in localStorage) {
+            localStorage.setItem('favorites', '[]');
+        }
+
         fetch('https://dummyjson.com/products')
             .then(res => res.json())
             .then(data => {
                 products.push(...data.products);
 
+                reconstructFavorites()
                 const displayedOnLoad = products.slice(0, 6)
 
                 populateWithItems(displayedOnLoad)
