@@ -24,9 +24,7 @@ body {
     z-index: 10;
 }
 
-.cart:hover {
-    transform: scale(1.2);
-}
+.cart:hover { transform: scale(1.2); }
 
 main {
     min-width: 18.75rem;
@@ -46,9 +44,10 @@ a {
     padding: 0 0.5rem;
     text-decoration: none;
     color: white;
+    transition: all 0.35s ease-in-out;
 }
 
-a.view-left:target, a.view-right:target {
+.selected-view {
     color: black;
     background-color: white;
     font-weight: bold;

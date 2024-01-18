@@ -26,13 +26,13 @@
                 <h1>Pick the best plan for you</h1>
                 <h4 class="subheading">You have Free Unlimited Updates and Premium Support on each package.</h4>
                 <div class="view">
-                    <a id="month-view"  class="view-left" href="#month-view">Month view</a>
-                    <a id="week-view" class= "view-right" href="#week-view">Week view</a>
+                    <a id="monthly-view"  class="view-left" href="">Month view</a>
+                    <a id="weekly-view" class= "view-right" href="">Week view</a>
                 </div>
             </div>
 
             <div class="subscriptions">
-                <div class="card">
+                <div id="bravo" class="card">
                     <div class="card-top">
                         <div>
                             <h4 class="card-title">Bravo Pack</h4>
@@ -57,7 +57,7 @@
                     </div>
                 </div>
 
-                <div class="card featured">
+                <div id="alpha" class="card featured">
                     <div class="featured-tag">Featured</div>
                     <div class="card-top">
                         <div>
@@ -87,7 +87,7 @@
                     </div>
                 </div>
 
-                <div class="card">
+                <div id="charlie" class="card">
                     <div class="card-top">
                         <div>
                             <h4 class="card-title">Charlie Pack</h4>
@@ -111,7 +111,7 @@
                     </div>
                 </div>
 
-                <div class="card">
+                <div id="extra" class="card">
 
                     <div class="card-top">
                         <div>
@@ -141,5 +141,103 @@
             </div>
         </div>
     </main>
+
+    <script>
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        const subscriptions = {
+            bravo: {
+                name: 'Bravo',
+                monthlyPrice: 10,
+                weeklyPrice: 3,
+                subheading: 'Complete documentation',
+                description: 'Working materials in Sketch',
+                featured: false,
+            },
+            alpha: {
+                name: 'Alpha',
+                monthlyPrice: 67,
+                weeklyPrice: 23,
+                subheading: 'Working materials in EPS',
+                description: '6 months access to the library',
+                featured: true,
+            },
+            charlie: {
+                name: 'Charlie',
+                monthlyPrice: 69,
+                weeklyPrice: 25,
+                subheading: 'Working materials in PSD',
+                description: '1 year access to the library',
+                featured: false,
+            },
+            extra: {
+                name: 'Extra',
+                monthlyPrice: 159,
+                weeklyPrice: 42,
+                subheading: 'Complete documentation',
+                description: '2GB cloud storage',
+                featured: false,
+            }
+        }
+
+        const toggleView = function () {
+            const queryParams = new URLSearchParams(window.location.search)
+            const allowedViews = ['monthly', 'weekly']
+            const selectedView = queryParams.get('view')
+
+            if (! selectedView || ! allowedViews.includes(selectedView)) {
+                history.pushState(null, '', '?view=monthly')
+                return toggleView()
+            }
+
+            const unselectedView = allowedViews.find(item => item !== selectedView)
+
+            document.querySelector(`#${selectedView}-view`)
+                .classList.toggle('selected-view')
+            
+            document.querySelector(`#${unselectedView}-view`)
+                .classList.remove('selected-view')
+            
+            return selectedView
+        }
+
+        const changeCardPrice = function (cardId, price) {
+            document.querySelector(`#${cardId} .card-price`)
+                .textContent = `$ ${price}`
+        }
+
+        const updatePrices = function (monthly = true) {
+            for (const [key, value] of Object.entries(subscriptions)) {
+                const price = (monthly) ? value.monthlyPrice : value.weeklyPrice
+
+                changeCardPrice(key, price)
+            }
+        }
+
+        const togglePrices = function () {
+            const view = toggleView()
+            const monthly = (view === 'monthly')
+
+            return updatePrices(monthly)
+        }
+
+        togglePrices()
+
+        document.querySelector('#monthly-view')
+            .addEventListener('click', (e) => {
+            e.preventDefault()
+            history.pushState(null, '', '?view=monthly')
+            togglePrices()
+        })
+
+        document.querySelector('#weekly-view')
+            .addEventListener('click', (e) => {
+            e.preventDefault()
+            history.pushState(null, '', '?view=weekly')
+            togglePrices()
+        })
+ 
+
+    </script>
 </body>
 </html>
