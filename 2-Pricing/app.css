@@ -1,0 +1,171 @@
+:root {
+    --spacing: 1.875rem;
+    --featured-color: #EA580C;
+    --bravo-color: #EAB308;
+    --charlie-color: #22C55E;
+    --extra-color: #EF4444;
+}
+
+body {
+    background: no-repeat url("./images/Italian-streets.png");
+    background-size: cover;
+    background-position: center;
+    font-family: 'Manrope', sans-serif;
+    color: white;
+}
+
+main {
+    min-width: 18.75rem;
+    min-height: 100vh;
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.container, .heading-section, .subscriptions,
+.card, .card-top, .card-bottom, .oval {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    padding: 3.75rem;
+    gap: 3.125rem;
+}
+
+.heading-section {
+    max-width: 21.875rem;
+    line-height: 1.5rem;
+    gap: 0.9375rem;
+}
+
+.subscriptions {
+    flex-wrap: wrap;
+    gap: var(--spacing);
+}
+
+h1, h4 {
+    margin: 0;
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bolder;
+    font-size: x-large;
+}
+
+h4 {
+    font-weight: bold;
+    font-size: medium;
+}
+
+p { font-size: small; }
+
+.card {
+    box-sizing: border-box;
+    padding: 1.875rem 0.315rem;
+    width: 14.6875rem;
+    height: 25rem;
+    border: solid 1px white;
+    border-radius: 1%;
+}
+
+.card:hover {
+    height: 27rem;
+    width: 16.25rem;
+    margin: -1rem -0.785rem;
+}
+
+.card:hover .card-price { font-size: xx-large; }
+.card:hover .card-title { font-size: x-large; }
+.card:hover p { font-size: medium; }
+.card:hover .button { font-size: medium; }
+
+.card-top {
+    justify-content: space-between;
+    height: 70%;
+    width: 100%;
+    gap: 0.685rem;
+    border-bottom: solid 1px gray;
+}
+
+.card-title {
+    opacity: 0.7;
+    font-size: large;
+    font-weight: bolder;
+}
+
+.oval {
+    justify-content: center;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 100%;
+    background-color: white;
+}
+
+.bravo-shadow { filter: drop-shadow(0 0.75rem 1.25rem var(--bravo-color)); }
+.charlie-shadow{ filter: drop-shadow(0 0.75rem 1.25rem var(--charlie-color)); }
+.extra-shadow { filter: drop-shadow(0 0.75rem 1.25rem var(--extra-color)); }
+.featured-shadow { filter: drop-shadow(0 0.75rem 1.25rem var(--featured-color)); }
+
+.bravo { color: var(--bravo-color) }
+.charlie { color: var(--charlie-color) }
+.extra { color: var(--extra-color) }
+
+
+.card-price { font-size: x-large; }
+
+.card-bottom {
+    height: 30%;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.button {
+    font-size: small;
+    text-align: center;
+    width: 50%;
+    padding: 0.625rem;
+    border-radius: 1.5rem;
+    background-color: white;
+}
+
+.button:hover { cursor: pointer; }
+
+.featured {
+    position: relative;
+    overflow: hidden;
+    background-color: white;
+    opacity: 1;
+    color: gray;
+    font-weight: bolder;
+    border: unset;
+}
+
+.featured-price { color: black; }
+
+.featured-button {
+    color: white;
+    background-color: var(--featured-color);
+}
+
+.featured-tag {
+    font-family: 'Montserrat', sans-serif;
+    position: absolute;
+    padding: 0.75rem 1.875rem;
+    top: 0.6rem;
+    left: -1.875rem;
+    transform: rotate(315deg);
+    background-color: var(--featured-color);
+    color: white;
+    font-size: xx-small;
+    text-transform: uppercase;
+}
+
+
+@media (min-width: 475px) {
+    .subscriptions {
+        flex-direction: row;
+    }
+}
