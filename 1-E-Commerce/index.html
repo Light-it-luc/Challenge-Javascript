@@ -109,7 +109,7 @@
             clearItems()
  
             products.sort((a, b) => {
-                return (desc) ? a.title.localeCompare(b.title): b.title.localeCompare(a.title);
+                return (desc) ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title);
             })
 
             populateWithItems(products.slice(0, 6))
@@ -120,7 +120,7 @@
  
             const order = (desc) ? 1 : -1;
  
-            products.sort((a, b) => (a.price > b.price) ? order : -order)
+            products.sort((a, b) => order ? a.price - b.price : b.price - a.price)
 
             populateWithItems(products.slice(0, 6))
         }
@@ -219,9 +219,9 @@
 
                 const regex = new RegExp(inputValue, 'gi')
 
-                const filteredProducts = products.filter(item =>{
-                    return item.title.match(regex) || item.description.match(regex)
-                })
+                const filteredProducts = products.filter(item =>
+                    item.title.match(regex) || item.description.match(regex)
+                )
 
                 if (filteredProducts.length) return populateWithItems(filteredProducts)
 
