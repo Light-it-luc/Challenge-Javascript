@@ -1,10 +1,6 @@
 :root {
-    --lg-screen-size: 820px;
-    --md-screen-size: 686px;
     --card-padding: 20px;
     --card-text-spacing: 15px;
-    --card-inner-spacing: 25px;
-    --selected-color: rgba(0, 0, 0, 0.70);
 }
 
 .container {
@@ -32,14 +28,17 @@ h1 {
 
 #searchbar, select {
     padding: 0.5rem;
-    background: no-repeat center right 0.5rem url('images/Magnifer.png');
+    background: no-repeat center right 0.5rem url('images/Magnifer.svg');
     border-radius: 0.5rem;
     border: solid 1px lightgray;
 }
 
+#searchbar { max-width: 21.85rem; }
+
 select {
+    max-width: 23rem;
     color: gray;
-    background: no-repeat center right 0.5rem url('images/SearchArrow.png');
+    background: no-repeat center right 0.5rem url('images/SearchArrow.svg');
     -webkit-appearance: none;
     -moz-appearance: none;
 }
@@ -66,7 +65,7 @@ select {
     max-width: 13rem;
     max-height: 20rem;
     padding: var(--card-padding);
-    border-radius: 3%;
+    border-radius: 1rem;
     gap: 1rem;
     justify-content: space-between;
     border: 1px solid white;
@@ -78,11 +77,11 @@ select {
 
 .card-title {
     font-family: 'Ubuntu', sans-serif;
-    font-size: large;
+    font-size: 1.125rem;
 }
 
 .card-description, .card-price {
-    font-size: small;
+    font-size: 0.8125rem;
     font-weight: bolder;
     text-align: center;
     color: gray;
@@ -162,7 +161,7 @@ button {
     }
 }
 
-@media (min-width: 860px) {
+@media (min-width: 769px) {
     header {
         flex-direction: row;
     }
