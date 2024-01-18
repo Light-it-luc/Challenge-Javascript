@@ -58,7 +58,7 @@
                 <div class="card-footer">
                     <div class="card-price">€ ${card.price}</div>
     
-                        <div class="card-fav-icon">
+                        <button class="card-fav-icon" onclick="onFavoriteClick(event)">
                             <svg class="fav ${(card.favorite) ? 'fav-red' : ''}" data-product_id="${card.id}" 
                                 width="15" height="15" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path data-product_id="${card.id}" fill-rule="evenodd" clip-rule="evenodd" d="M11.6386 1.82364C10.3702
@@ -69,7 +69,7 @@
                                 2.94734C13.6154 2.23001 12.6482 1.82558 11.6386 1.82364Z"
                                 stroke="#EF4444" stroke-linecap="square"/>
                             </svg>
-                        </div>
+                        </button>
                 </div>
             `
 
@@ -118,9 +118,7 @@
         const sortByPrice = function (desc = true) {
             clearItems()
  
-            const order = (desc) ? 1 : -1;
- 
-            products.sort((a, b) => order ? a.price - b.price : b.price - a.price)
+            products.sort((a, b) => desc ? a.price - b.price : b.price - a.price)
 
             populateWithItems(products.slice(0, 6))
         }
@@ -175,6 +173,23 @@
             })
         }
 
+        const onFavoriteClick = function (e) {
+            const clickedItemIsFav = e.target.classList.contains('fav')
+            const clickedItemIsSVGPath = e.target.nodeName === 'path'
+
+            const productId = Number(e.target.dataset.product_id)
+
+            if (clickedItemIsFav) {
+                e.target.classList.add('fav-red')
+                return addItemToFavs(productId)
+            }
+            if (clickedItemIsSVGPath) {
+                e.target.parentNode.classList.remove('fav-red')
+                return removeItemFromFavs(productId)
+            }
+        }
+
+
         const products = [];
 
         localStorage.setItem('limit', '6');
@@ -228,23 +243,6 @@
                 document.querySelector('#products').innerHTML = `<h2>No Results Found</h2>`
             })
 
-        document.querySelector('#products')
-            .addEventListener('click', (e) => {
-                const clickedItemIsFav = e.target.classList.contains('fav')
-                const clickedItemIsSVGPath = e.target.nodeName === 'path'
-
-                const productId = Number(e.target.dataset.product_id)
-
-                if (clickedItemIsFav) {
-                    e.target.classList.add('fav-red')
-                    return addItemToFavs(productId)
-                }
-                if (clickedItemIsSVGPath) {
-                    e.target.parentNode.classList.remove('fav-red')
-                    return removeItemFromFavs(productId)
-                }
-            })
-        
         document.querySelector('select')
             .addEventListener('change', (e) => {
                 const selected = e.target.value
