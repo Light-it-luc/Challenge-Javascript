@@ -14,7 +14,7 @@ body {
     color: white;
 }
 
-.cart {
+#cart {
     background: none;
     border: none;
     position: fixed;
@@ -24,7 +24,7 @@ body {
     z-index: 10;
 }
 
-.cart:hover { transform: scale(1.2); }
+#cart:hover { transform: scale(1.2); }
 
 main {
     min-width: 18.75rem;
@@ -46,6 +46,8 @@ a {
     color: white;
     transition: all 0.35s ease-in-out;
 }
+
+h2 { margin: 0;}
 
 .selected-view {
     color: black;
@@ -175,14 +177,14 @@ p {
 .button {
     font-size: small;
     text-align: center;
+    border: none;
     width: 50%;
     padding: 0.625rem;
     border-radius: 1.5rem;
     background-color: white;
     transition: 0.2s ease-in-out;
+    cursor: pointer;
 }
-
-.button:hover { cursor: pointer; }
 
 .featured {
     position: relative;
@@ -215,12 +217,72 @@ p {
 }
 
 
+dialog {
+    position: relative;
+    border-radius: 1rem;
+    border: none;
+    background-color: white;
+}
+
+dialog::backdrop { background-color: rgba(0, 0, 0, 0.75); }
+
+.modal-content {
+    padding: 1rem;
+    max-width: 22rem;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.modal-txt {
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+    font-size: 1.125rem;
+    color: gray;
+}
+
+.modal-btn-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+.modal-btn {
+    font-family: 'Manrope', sans-serif;
+    font-size: 1rem;
+    text-align: center;
+    color: var(--featured-color);
+    padding: 0.825rem;
+    border: solid 1px var(--featured-color);
+    border-radius: 1.5rem;
+    background-color: white;
+    transition: 0.1s ease-in-out;
+    cursor: pointer;
+}
+
+.modal-btn:hover { transform: scale(1.1);}
+
+.modal-confirm {
+    color: white;
+    background-color: var(--featured-color);
+}
+
+.close-icon {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+}
+
 @media (min-width: 475px) {
     .subscriptions {
         flex-direction: row;
     }
 
-    .cart {
+    #cart {
         right: 2.5rem;
     }
 }
