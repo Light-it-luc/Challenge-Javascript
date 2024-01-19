@@ -22,8 +22,8 @@
                 <h2>Add to cart?</h2>
                 <p class="modal-txt"></p>
                 <div class="modal-btn-container">
-                    <button type="button" class="modal-btn close-modal">Cancel</button>
-                    <button type="button" class="modal-btn modal-confirm">Add to Cart</button>
+                    <button type="button" class="primary-btn modal-btn close-modal">Cancel</button>
+                    <button type="button" class="primary-btn modal-btn modal-confirm">Add to Cart</button>
                 </div>
             </div>
         </dialog>
@@ -36,6 +36,18 @@
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M21.0001 24.5C20.1716 24.5 19.5001 23.8285 19.5001 23C19.5001 22.1716 20.1716 21.5 21.0001 21.5C21.8285 21.5 22.5001 22.1716 22.5001 23C22.5001 23.8285 21.8285 24.5 21.0001 24.5ZM20.5001 23C20.5001 23.2762 20.7239 23.5 21.0001 23.5C21.2762 23.5 21.5001 23.2762 21.5001 23C21.5001 22.7239 21.2762 22.5 21.0001 22.5C20.7239 22.5 20.5001 22.7239 20.5001 23Z" fill="#FCFCFC"/>
             </svg>
         </button>
+        <div class="cart-display hidden">
+            <svg class="close-icon hide-cart" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 4L4 12" stroke="#1F2937" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M4 4L12 12" stroke="#1F2937" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+
+            <h2>My Cart</h2>
+            
+            <ul></ul>
+
+            <button type="button" class="primary-btn featured-button checkout">Checkout</button>
+        </div>
 
         <div class="container">
             <div class="heading-section">
@@ -69,7 +81,7 @@
 
                     <div class="card-bottom">
                         <p>Working materials in Sketch</p>
-                        <button type="button" class="button bravo" data-subscription="bravo">Add to cart</button>
+                        <button type="button" class="primary-btn button bravo" data-subscription="bravo">Add to cart</button>
                     </div>
                 </div>
 
@@ -99,7 +111,7 @@
                     </div>
                     <div class="card-bottom">
                         <p>6 months access to the library</p>
-                        <button type="button" class="button featured-button" data-subscription="alpha">Add to cart</button>
+                        <button type="button" class="primary-btn button featured-button" data-subscription="alpha">Add to cart</button>
                     </div>
                 </div>
 
@@ -123,7 +135,7 @@
                     </div>
                     <div class="card-bottom">
                         <p>1 year access to the library</p>
-                        <button type="button" class="button charlie" data-subscription="charlie">Add to cart</button>
+                        <button type="button" class="primary-btn button charlie" data-subscription="charlie">Add to cart</button>
                     </div>
                 </div>
 
@@ -150,7 +162,7 @@
                     </div>
                     <div class="card-bottom">
                         <p>2GB cloud storage</p>
-                        <button type="button" class="button extra" data-subscription="extra">Add to cart</button>
+                        <button type="button" class="primary-btn button extra" data-subscription="extra">Add to cart</button>
                     </div>
                 </div>
             </div>
@@ -158,8 +170,9 @@
     </main>
 
     <script>
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        if (! cart.length) localStorage.setItem('cart', '[]')
+        if (! JSON.parse(localStorage.getItem('cart'))) {
+            localStorage.setItem('cart', '[]')
+        }
 
         const subscriptions = {
             bravo: {
@@ -239,12 +252,14 @@
 
         const addToCart = function (planName) {
             const plan = subscriptions[planName]
+            const cart = JSON.parse(localStorage.getItem('cart'))
 
-            if (plan && ! cart.includes(plan)) {
-                cart.push(plan)
+            if (! plan || cart.includes(plan)) return
 
-                return localStorage.setItem('cart', JSON.stringify(plan))
-            }
+            cart.push(plan)
+            localStorage.setItem('cart', JSON.stringify(cart))
+
+            populateCart()
         }
 
         const showModal = function (subscriptionName) {
@@ -262,6 +277,92 @@
 
         const closeModal = function () {
             document.querySelector('dialog').close()
+        }
+
+        const toggleCartVisibility = function () {
+            const myCart = document.querySelector('.cart-display')
+            myCart.classList.toggle('hidden')
+        }
+
+        const populateCart = function () {
+            const cart = JSON.parse(localStorage.getItem('cart'))
+            const list = document.querySelector('.cart-display ul')
+
+            if (! cart.length) {
+                list.innerHTML = '<p class="empty-cart">Cart is empty</p>'
+                return
+            }
+
+            list.innerHTML = ''
+
+            cart.forEach(item => {
+                const li = document.createElement('li')
+                li.innerHTML = `
+                    <div class="flex-row">
+                        <button class="rm-btn" data-subscription="${item.name}" onclick="removeFromCart(event)">
+                        <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+                            width="15" height="15" viewBox="0 0 512.000000 512.000000"
+                            preserveAspectRatio="xMidYMid meet">
+
+                            <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+                            fill="#000000" stroke="none">
+                            <path d="M1871 5109 c-128 -25 -257 -125 -311 -241 -37 -79 -50 -146 -50 -259
+                            l0 -89 -389 0 c-222 0 -411 -4 -442 -10 -187 -36 -330 -184 -361 -376 -30
+                            -181 66 -371 231 -458 l69 -36 6 -58 c4 -31 65 -763 136 -1627 72 -863 134
+                            -1587 139 -1608 36 -155 177 -295 335 -332 91 -22 2561 -22 2652 0 158 37 299
+                            177 335 332 5 21 67 745 139 1608 71 864 132 1596 136 1627 l6 58 69 36 c165
+                            87 261 277 231 458 -31 192 -174 340 -361 376 -31 6 -220 10 -442 10 l-389 0
+                            0 89 c0 48 -5 112 -10 142 -34 180 -179 325 -359 359 -66 12 -1306 12 -1370
+                            -1z m1359 -309 c60 -31 80 -78 80 -190 l0 -90 -750 0 -750 0 0 90 c0 110 20
+                            159 78 189 36 19 60 20 670 21 615 0 634 -1 672 -20z m1200 -600 c45 -23 80
+                            -80 80 -130 0 -50 -35 -107 -80 -130 -39 -20 -55 -20 -1870 -20 -1815 0 -1831
+                            0 -1870 20 -45 23 -80 80 -80 130 0 48 35 107 78 129 36 20 65 20 1870 21
+                            1818 0 1833 0 1872 -20z m-236 -622 c-2 -24 -63 -747 -134 -1606 -140 -1694
+                            -129 -1598 -193 -1646 l-28 -21 -1279 0 -1279 0 -28 21 c-64 48 -53 -48 -193
+                            1646 -71 859 -132 1582 -134 1606 l-6 42 1640 0 1640 0 -6 -42z"/>
+                            <path d="M1587 3299 c-25 -13 -45 -34 -58 -62 l-21 -43 76 -1234 c85 -1381 76
+                            -1299 155 -1340 51 -25 91 -25 142 0 27 14 46 34 60 63 l21 43 -76 1234 c-85
+                            1381 -76 1299 -155 1340 -50 25 -95 25 -144 -1z"/>
+                            <path d="M2488 3299 c-23 -12 -46 -35 -58 -59 -20 -39 -20 -57 -20 -1280 0
+                            -1224 0 -1241 20 -1280 23 -45 80 -80 130 -80 50 0 107 35 130 80 20 39 20 56
+                            20 1280 0 1224 0 1241 -20 1280 -37 73 -127 99 -202 59z"/>
+                            <path d="M3387 3299 c-77 -41 -68 37 -153 -1339 l-76 -1234 21 -43 c14 -29 33
+                            -49 60 -63 51 -25 91 -25 142 0 79 41 70 -41 155 1340 l76 1234 -21 43 c-37
+                            75 -127 103 -204 62z"/>
+                            </g>
+                        </svg>
+                        </button>
+                        <div class="checkout-row">
+                            <span>${item.name}</span> <span>$ ${item.monthlyPrice}</span>
+                        </div>
+                    </div>
+                `
+                list.append(li)
+            })
+
+            const totalRow = document.createElement('li')
+            const totalPrice = cart
+                .map(item => item.monthlyPrice)
+                .reduce((accum, iterator) => accum + iterator, 0)
+
+            totalRow.innerHTML = `
+                <div class="checkout-row total-row">
+                    <span>Total:</span> <span>$ ${totalPrice}</span>
+                </div>
+            `
+            list.append(totalRow)
+        }
+
+        const removeFromCart = function (event) {
+            const planToRM = event.currentTarget.dataset.subscription
+
+            const cart = JSON.parse(localStorage.getItem('cart'))
+            const idx = cart.findIndex(item => item.name == planToRM)
+            cart.splice(idx, 1)
+
+            localStorage.setItem('cart', JSON.stringify(cart))
+
+            populateCart()
         }
 
         togglePrices()
@@ -287,6 +388,17 @@
                     showModal(planName)
                 }))
 
+        document.querySelector('#cart')
+            .addEventListener('click', () => {
+                toggleCartVisibility()
+                populateCart()
+            })
+        
+        document.querySelector('.hide-cart')
+            .addEventListener('click', () => {
+                toggleCartVisibility()
+            })
+
         document.querySelectorAll('.close-modal')
             .forEach(node => node.addEventListener('click', closeModal))
 
@@ -296,6 +408,7 @@
                 addToCart(planName)
                 closeModal()
             })
+
     </script>
 </body>
 </html>

@@ -174,7 +174,7 @@ p {
     justify-content: space-between;
 }
 
-.button {
+.primary-btn {
     font-size: small;
     text-align: center;
     border: none;
@@ -250,17 +250,10 @@ dialog::backdrop { background-color: rgba(0, 0, 0, 0.75); }
     gap: 1rem;
 }
 
-.modal-btn {
-    font-family: 'Manrope', sans-serif;
-    font-size: 1rem;
-    text-align: center;
-    color: var(--featured-color);
-    padding: 0.825rem;
+.modal-btn { 
     border: solid 1px var(--featured-color);
-    border-radius: 1.5rem;
-    background-color: white;
-    transition: 0.1s ease-in-out;
-    cursor: pointer;
+    font-size: 1rem;
+    min-width: 8rem;
 }
 
 .modal-btn:hover { transform: scale(1.1);}
@@ -276,6 +269,80 @@ dialog::backdrop { background-color: rgba(0, 0, 0, 0.75); }
     right: 1rem;
     cursor: pointer;
 }
+
+.cart-display {
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+    width: 14rem;
+    padding: 1rem;
+    background: white;
+    color: var(--featured-color);
+    border-radius: 1rem;
+    position: fixed;
+    top: 6rem;
+    right: 4rem;
+    border: solid 1px lightgray
+}
+
+.hidden { display: none; }
+
+.cart-display > ul {
+    margin: 0;
+    padding: 2rem 0;
+}
+
+.cart-display > ul > li {
+    list-style: none;
+    color: black;
+    font-size: 1.25rem;
+    padding: 0.25rem 0;
+}
+
+.checkout-row {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.25rem 0.5rem;
+    border-bottom: solid 1px lightgray;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.total-row {
+    padding: 1rem 0.5rem;
+    font-size: 1.5rem;
+    border: none;
+}
+
+.rm-btn {
+    transition: 0.1s ease-in-out;
+    background: none;
+    border: none;
+    padding: none;
+}
+
+.rm-btn:hover { transform: scale(1.25);}
+
+.empty-cart {
+    color: gray;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.checkout {
+    margin: 0 auto;
+    width: 8rem;
+    transition: 0.25s ease-in-out;
+}
+
+.checkout:hover { transform: scale(1.2); }
 
 @media (min-width: 475px) {
     .subscriptions {
