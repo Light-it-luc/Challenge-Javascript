@@ -40,7 +40,7 @@ main {
 }
 
 a {
-    font-size: x-small;
+    font-size: 0.625rem;
     padding: 0 0.5rem;
     text-decoration: none;
     color: white;
@@ -96,17 +96,17 @@ h1, h4 {
 h1 {
     font-family: 'Ubuntu', sans-serif;
     font-weight: bolder;
-    font-size: x-large;
+    font-size: 1.5rem;
 }
 
 h4 {
     font-weight: bold;
-    font-size: medium;
+    font-size: 1rem;
 }
 
 p {
     transition: 0.2s ease-in-out;
-    font-size: small;
+    font-size: 0.8125;
 }
 
 .card {
@@ -125,10 +125,10 @@ p {
     margin: -1rem -0.785rem;
 }
 
-.card:hover .card-price { font-size: xx-large; }
-.card:hover .card-title { font-size: x-large; }
-.card:hover p { font-size: medium; }
-.card:hover .button { font-size: medium; }
+.card:hover .card-price { font-size: 2rem; }
+.card:hover .card-title { font-size: 1.5rem; }
+.card:hover p { font-size: 1rem; }
+.card:hover .button { font-size: 1rem; }
 
 .card-top {
     justify-content: space-between;
@@ -141,7 +141,7 @@ p {
 .card-title {
     transition: 0.2s ease-in-out;
     opacity: 0.7;
-    font-size: large;
+    font-size: 1.125rem;
     font-weight: bolder;
 }
 
@@ -165,7 +165,7 @@ p {
 
 .card-price {
     transition: 0.2s ease-in-out;
-    font-size: x-large
+    font-size: 1.5rem;
 }
 
 .card-bottom {
@@ -175,7 +175,7 @@ p {
 }
 
 .primary-btn {
-    font-size: small;
+    font-size: 0.8125;
     text-align: center;
     border: none;
     width: 50%;
@@ -212,7 +212,7 @@ p {
     transform: rotate(315deg);
     background-color: var(--featured-color);
     color: white;
-    font-size: xx-small;
+    font-size: 0.5625rem;
     text-transform: uppercase;
 }
 
