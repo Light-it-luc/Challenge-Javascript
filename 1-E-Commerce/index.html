@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;400&family=Ubuntu&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="app.css">
+    <title>Shop</title>
+
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Find what you need</h1>
+
+            <div class="filters-container">
+                <input type="text" name="search" id="searchbar" placeholder="Search">
+                <select name="sort-by">
+                    <option value="" default>Sort / Filter</option>
+                    <optgroup label="Sort by">
+                        <option value="A-Z">A-Z</option>
+                        <option value="Z-A">Z-A</option>
+                        <option value="Low-price">Lowest Price</option>
+                        <option value="High-price">Highest Price</option>
+                    </optgroup>
+                    <optgroup label="Filter">
+                        <option value="Favorites">Favorites</option>
+                    </optgroup>
+                </select>
+            </div>
+        </header>
+
+        <div id="products">
+        </div>
+
+        <div class="btn-container">
+            <button type="button" id="load-more">Load more</button>
+        </div>
+    </div>
+
+    <script>
+        const createCardNode = function (card) {
+            const container = document.createElement('div')
+            container.classList.add('card')
+            container.innerHTML = `
+                <div class="card-img">
+                    <img src="${card.thumbnail}" alt="">
+                </div>
+
+                <div class="card-text">
+                    <h4 class="card-title">${card.title}</h4>
+                    <p class="card-description">${card.description}</p>
+                </div>
+                
+                <div class="card-footer">
+                    <div class="card-price">€ ${card.price}</div>
+    
+                        <button class="card-fav-icon" onclick="onFavoriteClick(event)">
+                            <svg class="fav ${(card.favorite) ? 'fav-red' : ''}" data-product_id="${card.id}" 
+                                width="15" height="15" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path data-product_id="${card.id}" fill-rule="evenodd" clip-rule="evenodd" d="M11.6386 1.82364C10.3702
+                                1.8186 9.18685 2.46096 8.50001 3.52735C7.81317 2.46096 6.62981 1.8186 5.36138
+                                1.82364C4.35178 1.82558 3.38462 2.23001 2.67417 2.94734C1.96371 3.66466 1.56861
+                                4.63566 1.57638 5.64524C1.57638 9.44384 8.50001 15.1764 8.50001 15.1764C8.50001
+                                15.1764 15.4236 9.44384 15.4236 5.64524C15.4314 4.63566 15.0363 3.66466 14.3259
+                                2.94734C13.6154 2.23001 12.6482 1.82558 11.6386 1.82364Z"
+                                stroke="#EF4444" stroke-linecap="square"/>
+                            </svg>
+                        </button>
+                </div>
+            `
+
+            return container
+        }
+
+        const populateWithItems = function (items = products) {
+            const container = document.querySelector('#products')
+
+            items.forEach(product => {
+                const node = createCardNode(product)
+
+                container.append(node);
+            })
+        }
+
+        const augmentLimit = function (augmentBy = 6) {
+            const currentLimit = JSON.parse(localStorage.getItem('limit'))
+
+            const validationPassed = typeof currentLimit === 'number' &&
+                Number.isInteger(currentLimit) &&
+                currentLimit >= 6
+
+            if (validationPassed) {
+                localStorage.setItem('limit', JSON.stringify(currentLimit + augmentBy))
+            } else {
+                localStorage.setItem('limit', '6')
+            }
+        }
+
+        const clearItems = function () {
+            const container = document.querySelector('#products')
+            container.innerHTML = ''
+        }
+
+        const sortAlphabetically = function (desc = true) {
+            clearItems()
+ 
+            products.sort((a, b) => {
+                return (desc) ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title);
+            })
+
+            populateWithItems(products.slice(0, 6))
+        }
+
+        const sortByPrice = function (desc = true) {
+            clearItems()
+ 
+            products.sort((a, b) => desc ? a.price - b.price : b.price - a.price)
+
+            populateWithItems(products.slice(0, 6))
+        }
+
+        const sortById = function () {
+            clearItems()
+ 
+            products.sort((a, b) => (a.id > b.id) ? 1 : -1)
+
+            populateWithItems(products.slice(0, 6))
+        }
+
+        const filterByFavorites = function () {
+            clearItems()
+
+            const favorites = JSON.parse(localStorage.getItem('favorites')) || []
+            
+            populateWithItems(favorites.slice(0, 6))
+        }
+
+        const addItemToFavs = function (itemId) {
+            const currentFavs = JSON.parse(localStorage.getItem('favorites')) || []
+            const item = products.find(item => item.id == itemId)
+
+            item['favorite'] = true
+
+            if (item) {
+                currentFavs.push(item)
+                localStorage.setItem('favorites', JSON.stringify(currentFavs))
+            }
+        }
+
+        const removeItemFromFavs = function (itemId) {
+            const currentFavs = JSON.parse(localStorage.getItem('favorites')) || []
+            const index = currentFavs.map(item => item.id).indexOf(itemId)
+            const item = products.find(item => item.id === itemId)
+
+            delete item['favorite']
+
+            if (index > -1) {
+                currentFavs.splice(index, 1)
+                localStorage.setItem('favorites', JSON.stringify(currentFavs))
+            }
+        }
+
+        const reconstructFavorites = function () {
+            const favorites = JSON.parse(localStorage.getItem('favorites')) || []
+
+            favorites.forEach(item => {
+                const inProducts = products.find(product => product.id == item.id)
+                inProducts['favorite'] = true
+            })
+        }
+
+        const onFavoriteClick = function (e) {
+            const clickedItemIsFav = e.target.classList.contains('fav')
+            const clickedItemIsSVGPath = e.target.nodeName === 'path'
+
+            const productId = Number(e.target.dataset.product_id)
+
+            if (clickedItemIsFav) {
+                e.target.classList.add('fav-red')
+                return addItemToFavs(productId)
+            }
+            if (clickedItemIsSVGPath) {
+                e.target.parentNode.classList.remove('fav-red')
+                return removeItemFromFavs(productId)
+            }
+        }
+
+
+        const products = [];
+
+        localStorage.setItem('limit', '6');
+        if (! 'favorites' in localStorage) {
+            localStorage.setItem('favorites', '[]');
+        }
+
+        fetch('https://dummyjson.com/products')
+            .then(res => res.json())
+            .then(data => {
+                products.push(...data.products);
+
+                reconstructFavorites()
+                const displayedOnLoad = products.slice(0, 6)
+
+                populateWithItems(displayedOnLoad)
+            })
+            .catch(err => console.log(err))
+
+        document.querySelector('#load-more')
+            .addEventListener('click', (e) => {
+            e.preventDefault()
+
+            clearItems()
+            augmentLimit()
+            const { limit } = localStorage
+
+            const newItems = products.slice(0, Number(limit))
+            populateWithItems(newItems)
+        })
+
+        document.querySelector('#searchbar')
+            .addEventListener('keyup', (e) => {
+                clearItems()
+
+                const inputValue = e.target.value
+
+                if (! inputValue) {
+                    localStorage.setItem('limit', '6')
+                    return populateWithItems(products.slice(0, 6))
+                }
+
+                const regex = new RegExp(inputValue, 'gi')
+
+                const filteredProducts = products.filter(item =>
+                    item.title.match(regex) || item.description.match(regex)
+                )
+
+                if (filteredProducts.length) return populateWithItems(filteredProducts)
+
+                document.querySelector('#products').innerHTML = `<h2>No Results Found</h2>`
+            })
+
+        document.querySelector('select')
+            .addEventListener('change', (e) => {
+                const selected = e.target.value
+
+                switch (selected) {
+                    case 'A-Z':
+                        return sortAlphabetically()
+                    case 'Z-A':
+                        return sortAlphabetically(false)
+                    case 'Low-price':
+                        return sortByPrice()
+                    case 'High-price':
+                        return sortByPrice(false)
+                    case 'Favorites':
+                        return filterByFavorites()
+
+                    default:
+                        return sortById()
+                }
+            })
+    </script>
+</body>
+</html>
