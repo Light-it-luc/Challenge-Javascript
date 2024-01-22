@@ -1,0 +1,125 @@
+body, form, .register, .register-wrapper, .form-input-section {
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+    font-family: 'Manrope', sans-serif;
+    flex-direction: row;
+    align-items: center;
+    min-height: 100vh;
+    color: rgba(63, 69, 89, 1);
+    margin: 0;
+}
+
+.register {
+    width: 100%;
+    min-width: 15.625rem;
+    padding: 2rem 5%;
+}
+
+.register-wrapper {
+    width: 100%;
+    height: 100%;
+    gap: 1.75rem;
+}
+
+h1 {
+    margin: 0;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 1.5rem;
+}
+
+p {
+    font-size: 0.8125rem;
+    margin: 0.3rem 0;
+}
+
+a {
+    color: rgba(239, 68, 68, 1);
+    font-weight: bold;
+}
+
+form { gap: 1.75rem; }
+
+.form-input-section {
+    gap: 0.5rem;
+    border-bottom: 0.1rem solid gray;
+}
+
+.border-orange { border-color: rgba(239, 68, 68, 1);}
+
+.form-input {
+    position: relative;
+    display: flex;
+    gap: 0.35rem;
+    width: 100%;
+    margin-bottom: 0.35rem;
+}
+
+.center-icon {
+    display: flex;
+    align-items: center;
+}
+
+input {
+    width: 100%;
+    border: none;
+    font-size: 0.8125rem;
+    font-weight: lighter;
+}
+
+input:focus { outline: none; }
+::placeholder {
+    font-family: 'Manrope', sans-serif;
+    font-weight: normal;
+    font-size: 0.8125rem;
+}
+
+label {
+    font-size: 0.8125rem;
+    font-weight: bold;
+}
+
+.right { right: 0; }
+
+button {
+    background-color: rgba(239, 68, 68, 1);
+    border-radius: 5rem;
+    border: none;
+    padding: 0.65rem 0;
+    font-weight: lighter;
+    letter-spacing: 0.075rem;
+    color: white;
+    filter: drop-shadow(0 0 0.35rem rgba(63, 69, 89, 0.4));
+    cursor: pointer;
+}
+
+.toggle-password { cursor: pointer; }
+
+img {
+    max-height: 875px;
+    width: 100%;
+}
+
+#logo-img, img { display: none; }
+
+@media (min-width: 769px) {
+    #logo-img, img {
+        display: block;
+    }
+
+    #logo-img {
+        width: 66.6666%;
+        height: auto;
+    }
+
+    .register {
+        padding-top: 0;
+        padding-bottom: 0;
+        width: 33.3333%;
+    }
+    .register-wrapper {
+        min-height: 450px;
+    }
+}
