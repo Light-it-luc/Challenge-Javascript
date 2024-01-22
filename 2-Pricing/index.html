@@ -416,6 +416,13 @@
                 closeModal()
             })
 
+        document.querySelector('.container')
+            .addEventListener('click', (e) => {
+                const cart = document.querySelector('.cart-display')
+                if (! cart.classList.contains('hidden')) {
+                    toggleCartVisibility()
+                }
+            })
     </script>
 </body>
 </html>
