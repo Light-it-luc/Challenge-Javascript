@@ -246,11 +246,12 @@
         const togglePrices = function () {
             const view = toggleView()
             const monthly = (view === 'monthly')
-
+            populateCart(monthly)
             return updatePrices(monthly)
         }
 
         const addToCart = function (planName) {
+            const queryParams = new URLSearchParams(window.location.search)
             const plan = subscriptions[planName]
             const cart = JSON.parse(localStorage.getItem('cart'))
 
@@ -259,7 +260,8 @@
             cart.push(plan)
             localStorage.setItem('cart', JSON.stringify(cart))
 
-            populateCart()
+            const view = queryParams.get('view') === 'monthly'
+            populateCart(view)
         }
 
         const showModal = function (subscriptionName) {
@@ -284,7 +286,7 @@
             myCart.classList.toggle('hidden')
         }
 
-        const populateCart = function () {
+        const populateCart = function (monthlyPrices = true) {
             const cart = JSON.parse(localStorage.getItem('cart'))
             const list = document.querySelector('.cart-display ul')
 
@@ -333,7 +335,7 @@
                         </svg>
                         </button>
                         <div class="checkout-row">
-                            <span>${item.name}</span> <span>$ ${item.monthlyPrice}</span>
+                            <span>${item.name}</span> <span>$ ${monthlyPrices ? item.monthlyPrice : item.weeklyPrice }</span>
                         </div>
                     </div>
                 `
@@ -342,7 +344,7 @@
 
             const totalRow = document.createElement('li')
             const totalPrice = cart
-                .map(item => item.monthlyPrice)
+                .map(item => (monthlyPrices) ? item.monthlyPrice : item.weeklyPrice)
                 .reduce((accum, iterator) => accum + iterator, 0)
 
             totalRow.innerHTML = `
@@ -354,6 +356,9 @@
         }
 
         const removeFromCart = function (event) {
+            const queryParams = new URLSearchParams(window.location.search)
+            const view = queryParams.get('view') === 'monthly'
+
             const planToRM = event.currentTarget.dataset.subscription
 
             const cart = JSON.parse(localStorage.getItem('cart'))
@@ -362,7 +367,7 @@
 
             localStorage.setItem('cart', JSON.stringify(cart))
 
-            populateCart()
+            populateCart(view)
         }
 
         togglePrices()
@@ -390,8 +395,10 @@
 
         document.querySelector('#cart')
             .addEventListener('click', () => {
+                const queryParams = new URLSearchParams(window.location.search)
+                const view = queryParams.get('view') === 'monthly'
+                populateCart(view)
                 toggleCartVisibility()
-                populateCart()
             })
         
         document.querySelector('.hide-cart')
