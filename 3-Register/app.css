@@ -42,46 +42,44 @@ a {
 
 form { gap: 1.75rem; }
 
-.form-input-section {
-    gap: 0.5rem;
-    border-bottom: 0.1rem solid gray;
-}
-
-.border-orange { border-color: rgba(239, 68, 68, 1);}
-
-.form-input {
-    position: relative;
-    display: flex;
-    gap: 0.35rem;
-    width: 100%;
-    margin-bottom: 0.35rem;
-}
-
-.center-icon {
-    display: flex;
-    align-items: center;
-}
+.form-input-section { gap: 0.5rem; }
 
 input {
-    width: 100%;
+    padding: 0.5rem 1.5rem;
+    flex: 1;
     border: none;
+    border-bottom: 0.1rem solid gray;
     font-size: 0.8125rem;
     font-weight: lighter;
 }
 
-input:focus { outline: none; }
+input:focus {
+    outline: none;
+    border-color: rgba(239, 68, 68, 1);
+}
 ::placeholder {
     font-family: 'Manrope', sans-serif;
     font-weight: normal;
     font-size: 0.8125rem;
 }
 
+#email-input { background: no-repeat center left url('./images/Mail.svg'); }
+#username-input { background: no-repeat center left url('./images/User.svg'); }
+#password-input { background: no-repeat center left url('./images/Lock.svg'); }
+#password-confirm-input { background: no-repeat center left url('./images/Lock.svg'); }
+
 label {
     font-size: 0.8125rem;
     font-weight: bold;
 }
 
-.right { right: 0; }
+.input-with-toggle {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
 
 button {
     background-color: rgba(239, 68, 68, 1);
@@ -95,7 +93,11 @@ button {
     cursor: pointer;
 }
 
-.toggle-password { cursor: pointer; }
+.toggle-password {
+    position: absolute;
+    right: 1rem;
+    cursor: pointer;
+}
 
 img {
     max-height: 875px;
