@@ -5,6 +5,7 @@ body, form, .register, .register-wrapper, .form-input-section {
 
 body {
     font-family: 'Manrope', sans-serif;
+    background-color: rgba(254, 242, 242, 1);
     flex-direction: row;
     align-items: center;
     min-height: 100vh;
@@ -93,6 +94,10 @@ button {
     cursor: pointer;
 }
 
+.disabled {
+    background-color: rgba(171, 174, 183, 1);
+}
+
 .toggle-password {
     position: absolute;
     right: 1rem;
@@ -105,6 +110,13 @@ img {
 }
 
 #logo-img, img { display: none; }
+
+.error-msg {
+    color: red;
+    font-size: 0.725rem;
+    margin: 0;
+    transition: 0.2s ease-in-out;
+}
 
 @media (min-width: 769px) {
     #logo-img, img {

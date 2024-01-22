@@ -24,50 +24,135 @@
             <form action="#" method="post">
                 <div class="form-input-section">
                     <label for="email-input">Email</label>
-                    <input type="email" name="email" id="email-input" placeholder="Enter your email address">
+                    <input type="email" name="email" id="email-input" required placeholder="Enter your email address">
+                    <p id="email-error" class="error-msg"></p>
                 </div>
                 <div class="form-input-section">
                     <label for="username-input">Username</label>
-                    <input type="text" name="username" id="username-input" placeholder="Enter your User name">
+                    <input type="text" name="username" id="username-input" required placeholder="Enter your User name">
+                    <p id="username-error" class="error-msg"></p>
                 </div>
                 <div class="form-input-section">
                     <label for="password-input">Password</label>
                     <div class="input-with-toggle">
-                        <input type="password" name="password" id="password-input" placeholder="Enter your Password">
+                        <input type="password" name="password" id="password-input" required placeholder="Enter your Password">
                         <svg class="toggle-password" width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M7.38593 4.78272L9.53317 6.78681L9.54339 6.68184C9.54339 5.62888 8.62656 4.77318 7.4984 4.77318L7.38593 4.78272Z" fill="#5A5F70"/>
                             <path d="M7.49825 3.50074C9.37964 3.50074 10.9066 4.92588 10.9066 6.68184C10.9066 7.09221 10.818 7.48348 10.6646 7.84293L12.6585 9.70388C13.6878 8.90224 14.499 7.86521 15 6.68184C13.8173 3.88885 10.91 1.9102 7.49828 1.9102C6.54394 1.9102 5.63053 2.06925 4.78186 2.35555L6.25425 3.72659C6.63935 3.58663 7.05857 3.50074 7.49825 3.50074Z" fill="#5A5F70"/>
                             <path d="M0.681653 1.7671L2.23584 3.21768L2.54601 3.50717C1.42127 4.3279 0.531697 5.41902 0 6.6819C1.17929 9.47489 4.08998 11.4535 7.49831 11.4535C8.55489 11.4535 9.56374 11.2627 10.4874 10.9159L10.7771 11.1863L12.7642 13.0441L13.6333 12.2361L1.55077 0.955925L0.681653 1.7671ZM4.45127 5.28222L5.50444 6.26518C5.47377 6.40198 5.45332 6.53875 5.45332 6.6819C5.45332 7.73485 6.37014 8.59055 7.49831 8.59055C7.65168 8.59055 7.79825 8.57147 7.9414 8.54284L8.99457 9.52579C8.54125 9.73575 8.03684 9.863 7.49831 9.863C5.61692 9.863 4.08998 8.43786 4.08998 6.6819C4.08998 6.17929 4.22632 5.70848 4.45127 5.28222Z" fill="#5A5F70"/>
                         </svg>
                     </div>
+                    <p id="password-error" class="error-msg"></p>
                 </div>
                 <div class="form-input-section">
                     <label for="password-confirm-input">Confirm Password</label>
                     <div class="input-with-toggle">
-                        <input type="password" name="password-confirm" id="password-confirm-input" placeholder="Confirm your Password">
+                        <input type="password" name="password-confirm" id="password-confirm-input" required placeholder="Confirm your Password">
                         <svg class="toggle-password" width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M7.38593 4.78272L9.53317 6.78681L9.54339 6.68184C9.54339 5.62888 8.62656 4.77318 7.4984 4.77318L7.38593 4.78272Z" fill="#5A5F70"/>
                             <path d="M7.49825 3.50074C9.37964 3.50074 10.9066 4.92588 10.9066 6.68184C10.9066 7.09221 10.818 7.48348 10.6646 7.84293L12.6585 9.70388C13.6878 8.90224 14.499 7.86521 15 6.68184C13.8173 3.88885 10.91 1.9102 7.49828 1.9102C6.54394 1.9102 5.63053 2.06925 4.78186 2.35555L6.25425 3.72659C6.63935 3.58663 7.05857 3.50074 7.49825 3.50074Z" fill="#5A5F70"/>
                             <path d="M0.681653 1.7671L2.23584 3.21768L2.54601 3.50717C1.42127 4.3279 0.531697 5.41902 0 6.6819C1.17929 9.47489 4.08998 11.4535 7.49831 11.4535C8.55489 11.4535 9.56374 11.2627 10.4874 10.9159L10.7771 11.1863L12.7642 13.0441L13.6333 12.2361L1.55077 0.955925L0.681653 1.7671ZM4.45127 5.28222L5.50444 6.26518C5.47377 6.40198 5.45332 6.53875 5.45332 6.6819C5.45332 7.73485 6.37014 8.59055 7.49831 8.59055C7.65168 8.59055 7.79825 8.57147 7.9414 8.54284L8.99457 9.52579C8.54125 9.73575 8.03684 9.863 7.49831 9.863C5.61692 9.863 4.08998 8.43786 4.08998 6.6819C4.08998 6.17929 4.22632 5.70848 4.45127 5.28222Z" fill="#5A5F70"/>
                         </svg>
                     </div>
+                    <p id="password-confirm-error" class="error-msg"></p>
                 </div>
             </form>
         
-            <button>Register</button>
+            <button class="disabled">Register</button>
         </div>
     </div>
     <script>
+        const emailIsValid = function (mail) {
+            const availableDomains = ['@gmail.com', '@hotmail.com', '@lightit.io']
+            const mailHasAcceptedDomain = availableDomains.some(domain => mail.endsWith(domain))
+
+            if (! mailHasAcceptedDomain) {
+                return populateErrors({ email: 'email ends with invalid domain' })
+            }
+
+            return true
+        }
+
+        const usernameIsValid = function (username) {
+            const allowedChars = new RegExp('^[a-z]+$')
+
+            if (! allowedChars.test(username)) {
+                return({ username: 'usernames can only contain lowercase characters' })
+            }
+
+            return true
+        }
+
+        const passwordIsValid = function (password) {
+            const correctLength = password.length >= 8
+            const hasUppercase = /[A-Z]/.test(password)
+            const hasLowecase = /[a-z]/.test(password)
+            const hasSpecialChar = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(password)
+
+            const isValid = correctLength && hasUppercase && hasLowecase && hasSpecialChar
+
+            if (! isValid) {
+                return populateErrors({ password: 'password must contain a lowercase,' +
+                'an uppercase, a special character and be 8 characters or more' })
+            }
+
+            return true
+        }
+
+        const passwordAndConfirmMatch = function () {
+            const pswd = document.querySelector('#password-input')
+            const confirm = document.querySelector('#password-confirm-input')
+
+            if (pswd.value !== confirm.value) {
+                return populateErrors({ confirm: 'Password & Confirm Password fields do not match' })
+            }
+
+            return true
+        }
+
+        const populateErrors = function (errors) {
+            const emailError = document.querySelector('#email-error')
+            const usernameError = document.querySelector('#username-error')
+            const pswdError = document.querySelector('#password-error')
+            const confirmError = document.querySelector('#password-confirm-error')
+
+            if (errors.hasOwnProperty('email')) emailError.textContent = errors.email
+            if (errors.hasOwnProperty('username')) usernameError.textContent = errors.username
+            if (errors.hasOwnProperty('password')) pswdError.textContent = errors.password
+            if (errors.hasOwnProperty('confirm')) confirmError.textContent = errors.confirm
+
+            return false
+        }
+
+        const clearErrors = () => populateErrors({
+            email: '', username: '', password: '', confirm: ''
+        })
+
         document.querySelectorAll('.toggle-password')
             .forEach(icon => icon.addEventListener('click', (e) => {
                 const input = e.currentTarget.previousElementSibling
 
+                console.log('clicked')
                 if (input.type === 'password') {
                     input.type = 'text'
                 } else {
                     input.type = 'password'
                 }
             }))
+    
+        document.querySelector('button')
+            .addEventListener('click', (event) => {
+                const email = document.querySelector('#email-input').value
+                const username = document.querySelector('#username-input').value
+                const password= document.querySelector('#password-input').value
+
+                const isValid = emailIsValid(email) &&
+                    usernameIsValid(username) &&
+                    passwordIsValid(password) &&
+                    passwordAndConfirmMatch()
+
+                if (isValid) clearErrors()
+            })
     </script>
 </body>
 </html>
