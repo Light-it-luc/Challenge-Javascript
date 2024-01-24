@@ -44,7 +44,7 @@
 
             <h2>My Cart</h2>
             
-            <ul></ul>
+            <ul id="cart-contents"></ul>
 
             <button type="button" class="primary-btn featured-button checkout">Checkout</button>
         </div>
@@ -81,7 +81,7 @@
 
                     <div class="flex-column card-bottom">
                         <p>Working materials in Sketch</p>
-                        <button type="button" class="primary-btn button bravo" data-subscription="bravo">Add to cart</button>
+                        <button type="button" class="primary-btn card-btn bravo" data-subscription="bravo">Add to cart</button>
                     </div>
                 </div>
 
@@ -111,7 +111,7 @@
                     </div>
                     <div class="flex-column card-bottom">
                         <p>6 months access to the library</p>
-                        <button type="button" class="primary-btn button featured-button" data-subscription="alpha">Add to cart</button>
+                        <button type="button" class="primary-btn card-btn featured-button" data-subscription="alpha">Add to cart</button>
                     </div>
                 </div>
 
@@ -135,7 +135,7 @@
                     </div>
                     <div class="flex-column card-bottom">
                         <p>1 year access to the library</p>
-                        <button type="button" class="primary-btn button charlie" data-subscription="charlie">Add to cart</button>
+                        <button type="button" class="primary-btn card-btn charlie" data-subscription="charlie">Add to cart</button>
                     </div>
                 </div>
 
@@ -162,7 +162,7 @@
                     </div>
                     <div class="flex-column card-bottom">
                         <p>2GB cloud storage</p>
-                        <button type="button" class="primary-btn button extra" data-subscription="extra">Add to cart</button>
+                        <button type="button" class="primary-btn card-btn extra" data-subscription="extra">Add to cart</button>
                     </div>
                 </div>
             </div>
@@ -212,21 +212,21 @@
         const toggleView = function () {
             const queryParams = new URLSearchParams(window.location.search)
             const allowedViews = ['monthly', 'weekly']
-            const selectedView = queryParams.get('view')
+            let selectedView = queryParams.get('view')
 
             if (! selectedView || ! allowedViews.includes(selectedView)) {
                 history.pushState(null, '', '?view=monthly')
-                return toggleView()
+                selectedView = 'monthly'
             }
 
-            const unselectedView = allowedViews.find(item => item !== selectedView)
+            const notSelectedView = allowedViews.find(item => item !== selectedView)
 
             document.querySelector(`#${selectedView}-view`)
                 .classList.toggle('selected-view')
             
-            document.querySelector(`#${unselectedView}-view`)
+            document.querySelector(`#${notSelectedView}-view`)
                 .classList.remove('selected-view')
-            
+
             return selectedView
         }
 
@@ -245,9 +245,9 @@
 
         const togglePrices = function () {
             const view = toggleView()
-            const monthly = (view === 'monthly')
-            populateCart(monthly)
-            return updatePrices(monthly)
+            const isMonthlyView = (view === 'monthly')
+            populateCart(isMonthlyView)
+            return updatePrices(isMonthlyView)
         }
 
         const addToCart = function (planName) {
@@ -260,8 +260,8 @@
             cart.push(plan)
             localStorage.setItem('cart', JSON.stringify(cart))
 
-            const view = queryParams.get('view') === 'monthly'
-            populateCart(view)
+            const isMonthlyView = queryParams.get('view') === 'monthly'
+            populateCart(isMonthlyView)
         }
 
         const showModal = function (subscriptionName) {
@@ -288,7 +288,7 @@
 
         const populateCart = function (monthlyPrices = true) {
             const cart = JSON.parse(localStorage.getItem('cart'))
-            const list = document.querySelector('.cart-display ul')
+            const list = document.querySelector('#cart-contents')
 
             if (! cart.length) {
                 list.innerHTML = '<p class="empty-cart">Cart is empty</p>'
@@ -357,7 +357,7 @@
 
         const removeFromCart = function (event) {
             const queryParams = new URLSearchParams(window.location.search)
-            const view = queryParams.get('view') === 'monthly'
+            const isMonthlyView = queryParams.get('view') === 'monthly'
 
             const planToRM = event.currentTarget.dataset.subscription
 
@@ -367,7 +367,7 @@
 
             localStorage.setItem('cart', JSON.stringify(cart))
 
-            populateCart(view)
+            populateCart(isMonthlyView)
         }
 
         togglePrices()
@@ -386,7 +386,7 @@
             togglePrices()
         })
  
-        document.querySelectorAll('button.button')
+        document.querySelectorAll('.card-btn')
             .forEach(button => 
                 button.addEventListener('click', (e) => {
                     const planName = e.target.dataset.subscription
@@ -396,8 +396,8 @@
         document.querySelector('#cart')
             .addEventListener('click', () => {
                 const queryParams = new URLSearchParams(window.location.search)
-                const view = queryParams.get('view') === 'monthly'
-                populateCart(view)
+                const isMonthlyView = queryParams.get('view') === 'monthly'
+                populateCart(isMonthlyView)
                 toggleCartVisibility()
             })
         
