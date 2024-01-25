@@ -1,0 +1,355 @@
+:root {
+    --spacing: 1.875rem;
+    --featured-color: #EA580C;
+    --bravo-color: #EAB308;
+    --charlie-color: #22C55E;
+    --extra-color: #EF4444;
+}
+
+html {
+    height: 100%;
+    background: no-repeat url("./images/Italian-streets.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+body {
+    min-height: 100%;
+    font-family: 'Manrope', sans-serif;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+#cart {
+    background: none;
+    border: none;
+    position: fixed;
+    top: 2rem;
+    right: 0.1rem;
+    transition: 0.2s ease-in-out;
+    z-index: 10;
+}
+
+#cart:hover { transform: scale(1.2); }
+
+main {
+    min-height: 100%;
+    height: 100%;
+    min-width: 18.75rem;
+}
+
+.view {
+    display: flex;
+    align-items: center;
+    border-radius: 4rem;
+    border: solid 1px white;
+}
+
+a {
+    font-size: 0.625rem;
+    padding: 0 0.5rem;
+    text-decoration: none;
+    color: white;
+    transition: all 0.35s ease-in-out;
+}
+
+h2 { margin: 0; }
+
+.selected-view {
+    color: black;
+    background-color: white;
+    font-weight: bold;
+}
+
+.view-left {
+    border-radius: 4rem 0 0 4rem;
+}
+
+.view-right {
+    border-radius: 0 4rem 4rem 0;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    padding: 3.75rem;
+    gap: 3.125rem;
+}
+
+.heading-section {
+    max-width: 21.875rem;
+    line-height: 1.5rem;
+    gap: 0.9375rem;
+}
+
+.subscriptions {
+    flex-wrap: wrap;
+    gap: var(--spacing);
+}
+
+h1, h4 {
+    margin: 0;
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bolder;
+    font-size: 1.5rem;
+}
+
+h4 {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+p {
+    transition: 0.2s ease-in-out;
+    font-size: 0.8125;
+}
+
+.card {
+    box-sizing: border-box;
+    padding: 1.875rem 0.315rem;
+    width: 14.6875rem;
+    height: 25rem;
+    border: solid 1px white;
+    border-radius: 1%;
+    transition: 0.2s ease-in-out;
+}
+
+.card:hover {
+    height: 27rem;
+    width: 16.25rem;
+    margin: -1rem -0.785rem;
+}
+
+.card:hover .card-price { font-size: 2rem; }
+.card:hover .card-title { font-size: 1.5rem; }
+.card:hover p { font-size: 1rem; }
+.card:hover .card-btn { font-size: 1rem; }
+
+.card-top {
+    justify-content: space-between;
+    height: 70%;
+    width: 100%;
+    gap: 0.685rem;
+    border-bottom: solid 1px gray;
+}
+
+.card-title {
+    transition: 0.2s ease-in-out;
+    opacity: 0.7;
+    font-size: 1.125rem;
+    font-weight: bolder;
+}
+
+.oval {
+    justify-content: center;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 100%;
+    background-color: white;
+}
+
+.bravo-shadow { filter: drop-shadow(0 0.75rem 1.25rem var(--bravo-color)); }
+.charlie-shadow{ filter: drop-shadow(0 0.75rem 1.25rem var(--charlie-color)); }
+.extra-shadow { filter: drop-shadow(0 0.75rem 1.25rem var(--extra-color)); }
+.featured-shadow { filter: drop-shadow(0 0.75rem 1.25rem var(--featured-color)); }
+
+.bravo { color: var(--bravo-color) }
+.charlie { color: var(--charlie-color) }
+.extra { color: var(--extra-color) }
+
+
+.card-price {
+    transition: 0.2s ease-in-out;
+    font-size: 1.5rem;
+}
+
+.card-bottom {
+    height: 30%;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.primary-btn {
+    font-size: 0.8125;
+    text-align: center;
+    border: none;
+    width: 50%;
+    padding: 0.625rem;
+    border-radius: 1.5rem;
+    background-color: white;
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.featured {
+    position: relative;
+    overflow: hidden;
+    background-color: white;
+    color: gray;
+    font-weight: bolder;
+    border: unset;
+}
+
+.featured-price { color: black; }
+
+.featured-button {
+    color: white;
+    background-color: var(--featured-color);
+}
+
+.featured-tag {
+    font-family: 'Montserrat', sans-serif;
+    position: absolute;
+    padding: 0.75rem 1.875rem;
+    top: 0.6rem;
+    left: -1.875rem;
+    transform: rotate(315deg);
+    background-color: var(--featured-color);
+    color: white;
+    font-size: 0.5625rem;
+    text-transform: uppercase;
+}
+
+
+dialog {
+    position: relative;
+    border-radius: 1rem;
+    border: none;
+    background-color: white;
+}
+
+dialog::backdrop { background-color: rgba(0, 0, 0, 0.75); }
+
+.modal-content {
+    padding: 1rem;
+    max-width: 22rem;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.modal-txt {
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+    font-size: 1.125rem;
+    color: gray;
+}
+
+.modal-btn-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+.modal-btn { 
+    border: solid 1px var(--featured-color);
+    font-size: 1rem;
+    min-width: 8rem;
+}
+
+.modal-btn:hover { transform: scale(1.1);}
+
+.modal-confirm {
+    color: white;
+    background-color: var(--featured-color);
+}
+
+.close-icon {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+}
+
+.cart-display {
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+    width: 14rem;
+    padding: 1rem;
+    background: white;
+    color: var(--featured-color);
+    border-radius: 1rem;
+    position: fixed;
+    top: 6rem;
+    right: 4rem;
+    border: solid 1px lightgray
+}
+
+.hidden { display: none; }
+
+.cart-display > ul {
+    margin: 0;
+    padding: 2rem 0;
+}
+
+.cart-display > ul > li {
+    list-style: none;
+    color: black;
+    font-size: 1.25rem;
+    padding: 0.25rem 0;
+}
+
+.checkout-row {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.25rem 0.5rem;
+    border-bottom: solid 1px lightgray;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.total-row {
+    padding: 1rem 0.5rem;
+    font-size: 1.5rem;
+    border: none;
+}
+
+.rm-btn {
+    transition: 0.1s ease-in-out;
+    background: none;
+    border: none;
+    padding: none;
+}
+
+.rm-btn:hover { transform: scale(1.25);}
+
+.empty-cart {
+    color: gray;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.checkout {
+    margin: 0 auto;
+    width: 8rem;
+    transition: 0.25s ease-in-out;
+}
+
+.checkout:hover { transform: scale(1.2); }
+
+@media (min-width: 475px) {
+    .subscriptions { flex-direction: row; }
+
+    #cart { right: 2.5rem; }
+}
