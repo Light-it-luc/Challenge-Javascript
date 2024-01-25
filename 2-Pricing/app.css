@@ -6,15 +6,19 @@
     --extra-color: #EF4444;
 }
 
-html { height: 100%; }
-
-body {
+html {
     height: 100%;
     background: no-repeat url("./images/Italian-streets.png");
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
+}
+
+body {
+    min-height: 100%;
     font-family: 'Manrope', sans-serif;
     color: white;
+    background-color: rgba(0, 0, 0, 0.75);
 }
 
 #cart {
@@ -30,9 +34,9 @@ body {
 #cart:hover { transform: scale(1.2); }
 
 main {
+    min-height: 100%;
     height: 100%;
     min-width: 18.75rem;
-    background-color: rgba(0, 0, 0, 0.75);
 }
 
 .view {
@@ -50,7 +54,7 @@ a {
     transition: all 0.35s ease-in-out;
 }
 
-h2 { margin: 0;}
+h2 { margin: 0; }
 
 .selected-view {
     color: black;
@@ -345,11 +349,7 @@ dialog::backdrop { background-color: rgba(0, 0, 0, 0.75); }
 .checkout:hover { transform: scale(1.2); }
 
 @media (min-width: 475px) {
-    .subscriptions {
-        flex-direction: row;
-    }
+    .subscriptions { flex-direction: row; }
 
-    #cart {
-        right: 2.5rem;
-    }
+    #cart { right: 2.5rem; }
 }
