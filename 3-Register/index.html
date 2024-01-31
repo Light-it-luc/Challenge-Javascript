@@ -99,7 +99,7 @@
         }
 
         const usernameIsValid = function (username) {
-            const allowedChars = new RegExp('^[a-z]+$')
+            const allowedChars = /^[a-z]+$/
 
             if (username.length < 3) {
                 return populateErrors({ username: 'Usernames must have 3 or more characters' })
@@ -116,7 +116,7 @@
             const correctLength = password.length >= 8
             const hasUppercase = /[A-Z]/.test(password)
             const hasLowecase = /[a-z]/.test(password)
-            const hasSpecialChar = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(password)
+            const hasSpecialChar = /[!@#$%^&*()_+{}[\]:;<>,.?~\\/-]/.test(password)
 
             if (!correctLength) {
                 return populateErrors({ password: 'Password must be 8 characters or more'})
@@ -228,7 +228,7 @@
                 const btn = document.querySelector('#form-submit')
                 const isValid = validateForm()
 
-                btn.disabled = (isValid) ? false : true ;
+                btn.disabled = !isValid
             }))
     </script>
 </body>
