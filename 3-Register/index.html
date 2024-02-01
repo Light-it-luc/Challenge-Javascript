@@ -11,7 +11,7 @@
 </head>
 <body class="bg-red-500">
     <div id="logo-image">
-        <img src="./images/Register_Figure.png" alt="Register Figure"  >
+        <img src="./images/Register_Figure.png" alt="Register Figure" />
     </div>
 
     <div class="flex-col register">
@@ -138,10 +138,10 @@
         }
 
         const passwordAndConfirmMatch = function () {
-            const pswd = document.querySelector('#password-input')
+            const password = document.querySelector('#password-input')
             const confirm = document.querySelector('#password-confirm-input')
 
-            if (pswd.value !== confirm.value) {
+            if (password.value !== confirm.value) {
                 return populateErrors({ confirm: 'Password & Confirm Password fields do not match' })
             }
 
@@ -151,12 +151,12 @@
         const populateErrors = function (errors) {
             const emailError = document.querySelector('#email-error')
             const usernameError = document.querySelector('#username-error')
-            const pswdError = document.querySelector('#password-error')
+            const passwordError = document.querySelector('#password-error')
             const confirmError = document.querySelector('#password-confirm-error')
 
             if (errors.hasOwnProperty('email')) emailError.textContent = errors.email
             if (errors.hasOwnProperty('username')) usernameError.textContent = errors.username
-            if (errors.hasOwnProperty('password')) pswdError.textContent = errors.password
+            if (errors.hasOwnProperty('password')) passwordError.textContent = errors.password
             if (errors.hasOwnProperty('confirm')) confirmError.textContent = errors.confirm
 
             return false
@@ -203,14 +203,14 @@
             .addEventListener('click', (event) => {
                 const input = document.querySelector('#password-input')
                 passwordVisible = !passwordVisible
-                input.type = (passwordVisible)? 'text' : 'password' ;
+                input.type = (passwordVisible) ? 'text' : 'password';
             })
 
         document.querySelector('#confirm-toggle')
             .addEventListener('click', (event) => {
                 const input = document.querySelector('#password-confirm-input')
                 confirmPasswordVisible = !confirmPasswordVisible
-                input.type = (confirmPasswordVisible)? 'text' : 'password' ;
+                input.type = (confirmPasswordVisible) ? 'text' : 'password';
             })
 
         document.querySelector('#form-submit')
